@@ -48,6 +48,23 @@
 
 ## Vault 인증 스크린샷
 
+```mermaid
+sequenceDiagram
+    participant User
+    participant Vault
+    participant Cognito
+
+    User->>Vault: 로그인 요청
+    Vault->>User: 로그인 페이지 반환
+    User->>Cognito: 로그인 요청
+    Cognito->>User: 로그인 페이지 반환
+    User->>Cognito: 사용자 자격 증명 제공
+    Cognito->>Vault: ID Token 전달
+    Vault->>Cognito: ID Token 검증 요청
+    Cognito-->>Vault: ID Token 검증 결과
+    Vault->>User: 로그인 성공
+```
+
 ![img](/assets/vault-login.png)
 
 - Type: OIDC

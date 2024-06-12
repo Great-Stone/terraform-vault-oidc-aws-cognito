@@ -57,6 +57,23 @@ The following Terraform code includes the necessary configurations for AWS Cogni
 
 ## Vault Authentication Screenshots
 
+```mermaid
+sequenceDiagram
+    participant User
+    participant Vault
+    participant Cognito
+
+    User->>Vault: Login request
+    Vault->>User: Return login page
+    User->>Cognito: Login request
+    Cognito->>User: Return login page
+    User->>Cognito: Provide user credentials
+    Cognito->>Vault: Provide ID Token
+    Vault->>Cognito: Verification request for ID Token
+    Cognito-->>Vault: Verification result for ID Token
+    Vault->>User: Login successful
+```
+
 ![img](/assets/vault-login.png)
 
 - Type: OIDC
